@@ -1,0 +1,82 @@
+<nav class="navbar navbar-fixed-top navbar-inverse " id="main-nav">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Stormy Cloud</a>
+    </div>
+
+
+    <form class="navbar-form navbar-left" method="post" action="/search">
+      <div class="form-group">
+        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </form>
+
+<div class="collapse navbar-collapse" id="navbar-collapse">
+    <ul class="nav navbar-nav navbar-right">
+
+
+      <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories</a>
+        <ul class="dropdown-menu">
+          <% for (var i=0; i<categories.length; i++) { %>
+            <li><a href="/products/<%= categories[i]._id %>"><%= categories[i].name %></a></li>
+
+            <% } %>
+
+
+          </ul>
+        </li>
+
+
+        <% if(!user) { %>
+
+          <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Signup / Loggin</a>
+            <ul class="dropdown-menu">
+              <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> &nbsp&nbsp&nbsp&nbsp&nbsp   Sign Up</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> &nbsp&nbsp&nbsp&nbsp&nbsp    Log &nbspIn</a></li>
+                </ul>
+              </li>
+
+              <% } else { %>
+
+
+                <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><img class="img-circle img-center" src="<%= user.profile.picture %>" alt="" height="20px">&nbsp&nbsp<%= user.profile.name %></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/profile">Profile</a></li>
+                      <li><a href="/logout">Log Out</a></li>
+                      </ul>
+                    </li>
+
+
+                    <% } %>
+
+                    <% if(user) { %>
+                      <li><a href="/cart" class="glyphicon glyphicon-shopping-cart"><span class="badge"><%= cart %></span></a></li>
+
+                      <% } else { %>
+                        <!-- <li><a href="/" class="glyphicon glyphicon-shopping-cart"  ><span class="badge">0</span></a></li> -->
+                        <li><a class="glyphicon glyphicon-shopping-cart" href="#openModel" ><span class="badge">0</span></a></li>
+
+                        <div id="openModel" class="modalDialog">
+                          <div>
+                            <a href="#close" title="Close" class="close">X</a>
+                            <h2>Warning</h2>
+                            <p id="notSign">Please <a href="/login"><strong>Log in</strong></a> or <a href="/signup"><strong>Sign Up</strong></a> to shop.</p>
+                          </div>
+                        </div>
+
+
+
+
+                        <% } %>
+
+                      </ul>
+                    </div>
+                    </div>
+                  </nav>
